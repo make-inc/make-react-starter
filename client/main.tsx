@@ -10,18 +10,8 @@
  * 2. HTML is sent to the browser and displayed immediately
  * 3. This script loads and "hydrates" the static HTML
  * 4. The HTML becomes interactive with React's event handlers
- * 
- * Features:
- * - React 19 hydration for optimal performance
- * - Tailwind CSS styles loaded
- * - Error boundaries for production stability
- * - Hot module replacement in development
- * 
- * @author Express SSR App
- * @version 1.0.0
  */
 
-import React from 'react'
 import { hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'

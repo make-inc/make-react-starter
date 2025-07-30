@@ -12,9 +12,6 @@
  * Dependencies:
  * - clsx: For conditional class name construction
  * - tailwind-merge: For Tailwind CSS class conflict resolution
- * 
- * @author Express SSR App
- * @version 1.0.0
  */
 
 import { type ClassValue, clsx } from "clsx"

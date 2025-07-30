@@ -7,12 +7,8 @@
  * 
  * The client will then "hydrate" this server-rendered HTML with BrowserRouter,
  * making it interactive without requiring a full page reload.
- * 
- * @author Express SSR App
- * @version 1.0.0
  */
 
-import * as React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom/server'
 import App from '../client/App'
@@ -67,12 +63,12 @@ export function render(location: string = '/'): string {
     // Log rendering errors for debugging
     console.error(`❌ SSR render failed for route: ${location}`, error)
     
-    // Return a basic error fallback HTML that works without routing
+    // Return a basic error fallback HTML
     return `
       <div class="min-h-screen flex items-center justify-center bg-background">
         <div class="text-center">
           <h1 class="text-xl text-destructive mb-2">Rendering Error</h1>
-          <p class="text-muted-foreground">Failed to render route: ${location}</p>
+          <p class="text-muted-foreground">Uh-oh! Something went wrong while rendering the page.</p>
         </div>
       </div>
     `

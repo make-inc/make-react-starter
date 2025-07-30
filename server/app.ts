@@ -10,9 +10,6 @@
  * - Static file serving for production builds
  * - API route handling
  * - Error handling for SSR failures
- * 
- * @author Express SSR App
- * @version 1.0.0
  */
 
 import express from 'express'

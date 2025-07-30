@@ -13,13 +13,16 @@
  * - CSS hot reload with Tailwind
  * 
  * Usage: npm run dev
- * 
- * @author Express SSR App
- * @version 1.0.0
  */
 
 import { createServer } from 'vite'
+import { fileURLToPath } from 'url'
 import express from 'express'
+import path from 'path'
+import fs from 'fs'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 /**
  * Creates and configures the development server
@@ -72,24 +75,9 @@ async function createDevServer() {
     
     try {
       /**
-       * Basic HTML template for development
-       * In development, we use a simple template and let Vite
-       * handle the module loading and HMR injection
+       * Load HTML template from client directory
        */
-      let template = `
-        <!DOCTYPE html>
-        <html lang="en">
-          <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Express SSR App - Development</title>
-          </head>
-          <body>
-            <div id="root"><!--ssr-outlet--></div>
-            <script type="module" src="/client/main.tsx"></script>
-          </body>
-        </html>
-      `
+      let template = fs.readFileSync(path.resolve(__dirname, '../client/index.html'), 'utf-8')
       
       /**
        * Apply Vite HTML transforms
@@ -105,8 +93,11 @@ async function createDevServer() {
       const { render } = await vite.ssrLoadModule('/server/render.tsx')
       const appHtml = await render(url)
       
-      // Inject the rendered app HTML into the template
-      const html = template.replace('<!--ssr-outlet-->', appHtml)
+      // Inject the rendered app HTML into the template using robust div replacement
+      const html = template.replace(
+        '<div id="root"></div>',
+        `<div id="root">${appHtml}</div>`
+      )
       
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (e) {

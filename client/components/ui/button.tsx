@@ -18,9 +18,6 @@
  * - Class Variance Authority (CVA) for variant management
  * - Tailwind CSS for styling
  * - Custom utility function for class merging
- * 
- * @author Express SSR App
- * @version 1.0.0
  */
 
 import * as React from "react"
