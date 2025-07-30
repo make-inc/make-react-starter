@@ -1,9 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import { vitePluginErrorOverlay } from '@hiogawa/vite-plugin-error-overlay'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    vitePluginErrorOverlay(),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './client'),
