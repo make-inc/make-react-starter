@@ -1,3 +1,12 @@
+/**
+ * Global CSS styles and Tailwind CSS imports
+ * 
+ * This file contains:
+ * - Tailwind CSS directives for base styles, components, and utilities
+ * - CSS custom properties (variables) for theming in both light and dark modes
+ * - Design tokens for colors, typography, spacing, shadows, and layout
+ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
