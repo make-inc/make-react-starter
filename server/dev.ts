@@ -63,12 +63,10 @@ async function createDevServer() {
   app.use('/api', apiRoutes)
   
   /**
-   * Development SSR handler
+   * Development SPA handler
    * 
-   * This handler provides server-side rendering in development with:
-   * - Live reload when components change
-   * - Source map support for debugging
-   * - Error overlay for development
+   * This handler serves the HTML template for all routes,
+   * allowing React Router to handle client-side routing with HMR.
    */
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl
@@ -86,20 +84,8 @@ async function createDevServer() {
        */
       template = await vite.transformIndexHtml(url, template)
       
-      /**
-       * Load the server-side render function using Vite's SSR loading
-       * This ensures the render function is always up-to-date with changes
-       */
-      const { render } = await vite.ssrLoadModule('/server/render.tsx')
-      const appHtml = await render(url)
-      
-      // Inject the rendered app HTML into the template using robust div replacement
-      const html = template.replace(
-        '<div id="root"></div>',
-        `<div id="root">${appHtml}</div>`
-      )
-      
-      res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
+      // Send the HTML template - React will render on the client
+      res.status(200).set({ 'Content-Type': 'text/html' }).end(template)
     } catch (e) {
       /**
        * Fix stack traces for better error reporting in development
