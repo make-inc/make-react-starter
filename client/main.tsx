@@ -28,7 +28,12 @@ function initializeApp() {
   try {
     const root = createRoot(container)
     root.render(
-      <BrowserRouter>
+      <BrowserRouter
+        future={{
+          v7_relativeSplatPath: true,
+          v7_startTransition: true,
+        }}
+      >
         <App />
       </BrowserRouter>
     )
