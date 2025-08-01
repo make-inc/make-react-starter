@@ -13,6 +13,9 @@
  * Note: This file is responsible for setting up the server and should not be modified unless necessary.
  */
 
+import dotenv from 'dotenv'
+dotenv.config()
+
 import express from 'express'
 import { createServer as createHttpServer } from 'http'
 import { registerRoutes } from './routes/index.js'
