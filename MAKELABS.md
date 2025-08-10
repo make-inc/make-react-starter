@@ -22,8 +22,13 @@ This is an auto-generated document for AI assistants working on this starter rep
 ├── server/                    # Backend Express application
 │   ├── app.ts                # Express server entry point
 │   ├── routes/               # API route handlers
-│   └── vite.ts               # Vite integration for SSR
+│   ├── vite.ts               # Vite integration for SSR
+│   └── db/                   # Database migrations
+│       └── migrations/       # Generated migration files
 ├── shared/                   # Shared code between client/server
+│   └── schema.ts             # Database schema template (Drizzle ORM)
+├── drizzle.config.ts         # Drizzle Kit configuration
+├── .env.example              # Environment variables template
 └── dist/                     # Build output directory
 ```
 
@@ -45,6 +50,12 @@ This is an auto-generated document for AI assistants working on this starter rep
 - **tsx** for TypeScript execution in development
 - **Vite** integration for SSR capabilities
 
+### Database
+- **Drizzle ORM** for type-safe database operations
+- **PostgreSQL** as the primary database
+- **drizzle-kit** for migrations and schema management
+- **drizzle-zod** for runtime validation schemas
+
 ### Development Tools
 - **TypeScript** for type safety
 - **ESLint** for code linting
@@ -65,6 +76,7 @@ This is an auto-generated document for AI assistants working on this starter rep
 - Components go in `client/components/`
 - Pages go in `client/pages/`
 - API routes go in `server/routes/`
+- Database schemas in `shared/schema.ts` (template with examples, accessible by both client and server)
 - Shared utilities in `client/lib/` or `shared/`
 - Types can be defined inline or in dedicated `.d.ts` files
 
@@ -87,11 +99,29 @@ This is an auto-generated document for AI assistants working on this starter rep
    npm run typecheck
    ```
 
-2. **Follow existing patterns** - examine similar components/files before creating new ones
+2. **Database commands available**:
+   ```bash
+   npm run db:generate  # Generate migrations from schema changes
+   npm run db:push      # Push schema directly to database (dev)
+   npm run db:migrate   # Apply pending migrations (production)
+   npm run db:studio    # Open Drizzle Studio GUI
+   ```
 
-3. **Use existing dependencies** - don't add new packages without checking if functionality exists
+3. **Database setup required**:
+   - Set `DATABASE_URL` environment variable (see `.env.example`)
+   - Run PostgreSQL locally or use cloud provider
+   - Generate and apply initial migration: `npm run db:generate && npm run db:push`
 
-4. **Maintain TypeScript types** - ensure all new code is properly typed
+4. **Follow existing patterns** - examine similar components/files before creating new ones
+
+5. **Use existing dependencies** - don't add new packages without checking if functionality exists
+
+6. **Maintain TypeScript types** - ensure all new code is properly typed
+
+7. **Database schema workflow**:
+   - Define your tables in `shared/schema.ts` following the examples
+   - Run `npm run db:generate` after adding/modifying schemas
+   - Use `npm run db:push` for development or `npm run db:migrate` for production
 
 ## When You're Done
 
